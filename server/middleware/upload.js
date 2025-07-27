@@ -1,5 +1,4 @@
 const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('cloudinary').v2;
 const path = require('path');
 
@@ -45,62 +44,12 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Cloudinary storage for videos
-const videoStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'studify/videos',
-    resource_type: 'video',
-    allowed_formats: ['mp4', 'avi', 'mov', 'wmv', 'flv', 'webm'],
-    transformation: [
-      { quality: 'auto' },
-      { format: 'mp4' }
-    ]
-  },
-});
-
-// Cloudinary storage for images
-const imageStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'studify/images',
-    resource_type: 'image',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-    transformation: [
-      { quality: 'auto' },
-      { fetch_format: 'auto' }
-    ]
-  },
-});
-
-// Cloudinary storage for documents/presentations
-const documentStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'studify/documents',
-    resource_type: 'raw',
-    allowed_formats: ['pdf', 'doc', 'docx', 'ppt', 'pptx', 'txt', 'rtf']
-  },
-});
-
-// Cloudinary storage for thumbnails
-const thumbnailStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'studify/thumbnails',
-    resource_type: 'image',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [
-      { width: 1280, height: 720, crop: 'fill' },
-      { quality: 'auto' },
-      { fetch_format: 'auto' }
-    ]
-  },
-});
+// Storage configuration for Cloudinary
+const storage = multer.memoryStorage();
 
 // Upload middleware for videos
 const uploadVideo = multer({
-  storage: videoStorage,
+  storage: storage,
   fileFilter: fileFilter,
   limits: {
     fileSize: 500 * 1024 * 1024, // 500MB limit for videos
@@ -109,7 +58,7 @@ const uploadVideo = multer({
 
 // Upload middleware for images
 const uploadImage = multer({
-  storage: imageStorage,
+  storage: storage,
   fileFilter: fileFilter,
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit for images
@@ -118,7 +67,7 @@ const uploadImage = multer({
 
 // Upload middleware for documents
 const uploadDocument = multer({
-  storage: documentStorage,
+  storage: storage,
   fileFilter: fileFilter,
   limits: {
     fileSize: 50 * 1024 * 1024, // 50MB limit for documents
@@ -127,7 +76,7 @@ const uploadDocument = multer({
 
 // Upload middleware for course thumbnails
 const uploadThumbnail = multer({
-  storage: thumbnailStorage,
+  storage: storage,
   fileFilter: fileFilter,
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB limit for thumbnails
@@ -136,19 +85,7 @@ const uploadThumbnail = multer({
 
 // Upload middleware for user avatars
 const uploadAvatar = multer({
-  storage: new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-      folder: 'studify/avatars',
-      resource_type: 'image',
-      allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-      transformation: [
-        { width: 300, height: 300, crop: 'fill', gravity: 'face' },
-        { quality: 'auto' },
-        { fetch_format: 'auto' }
-      ]
-    },
-  }),
+  storage: storage,
   fileFilter: fileFilter,
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB limit for avatars
@@ -157,7 +94,7 @@ const uploadAvatar = multer({
 
 // Multiple file upload for lesson resources
 const uploadResources = multer({
-  storage: documentStorage,
+  storage: storage,
   fileFilter: fileFilter,
   limits: {
     fileSize: 50 * 1024 * 1024, // 50MB per file
@@ -167,7 +104,7 @@ const uploadResources = multer({
 
 // Mixed upload for lesson creation (video + thumbnail + resources)
 const uploadLessonFiles = multer({
-  storage: multer.memoryStorage(), // We'll handle storage manually
+  storage: storage,
   fileFilter: fileFilter,
   limits: {
     fileSize: 500 * 1024 * 1024, // 500MB max per file
