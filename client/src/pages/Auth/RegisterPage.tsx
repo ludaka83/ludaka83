@@ -1,0 +1,2 @@
+import React from 'react';
+export const RegisterPage: React.FC = () => <div className="min-h-screen bg-secondary-50 flex items-center justify-center"><div className="card p-8"><h1 className="text-2xl font-bold">Register</h1><p>Register page coming soon...</p></div></div>;
