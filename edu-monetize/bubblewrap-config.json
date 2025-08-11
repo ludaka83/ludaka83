@@ -1,0 +1,21 @@
+{
+  "packageId": "com.example.edumonetize",
+  "host": "localhost",
+  "name": "Edu Monetize",
+  "launcherName": "Edu",
+  "themeColor": "#111827",
+  "backgroundColor": "#ffffff",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://example.com/icon-512.png",
+  "maskableIconUrl": "https://example.com/icon-512-maskable.png",
+  "navigationColor": "#111827",
+  "navigationColorDark": "#111827",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "shortcuts": [],
+  "signingKey": {
+    "path": "android-signing-key.jks",
+    "alias": "upload"
+  }
+}
