@@ -34,3 +34,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## PWA and Play Store (TWA)
+
+This app is PWA-enabled and includes a service worker and manifest.
+
+To publish on Play Store via Trusted Web Activity (TWA):
+
+1. Install Bubblewrap globally:
+   ```bash
+   npm i -g @bubblewrap/cli
+   ```
+2. Update `bubblewrap-config.json` with your domain, packageId, and icons.
+3. Generate project and build release:
+   ```bash
+   bubblewrap init --manifest=https://YOUR_DOMAIN/manifest.webmanifest
+   # or use the local bubblewrap-config.json to seed values
+   bubblewrap build
+   ```
+4. Create/upload a Play Console signing key or use an upload key per your policy.
+5. Test on device:
+   ```bash
+   bubblewrap install
+   ```
+6. Submit the generated `.aab` to Play Console.
+
+Notes:
+- Ensure your site is served over HTTPS on a verified domain (required for TWA).
+- Update `.env` values in production and rebuild.
+- Confirm asset links for TWA: host `/.well-known/assetlinks.json` with proper SHA-256 from your signing key.
