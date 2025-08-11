@@ -23,10 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+  const adsEnabled = process.env.NEXT_PUBLIC_ADS_ENABLED === "true";
   return (
     <html lang="en">
       <head>
-        {adClient && (
+        {adsEnabled && adClient && (
           <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`}
