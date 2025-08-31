@@ -1,0 +1,2 @@
+import React from 'react';
+export const AdminAdsPage: React.FC = () => <div className="container-custom py-8"><h1 className="text-3xl font-bold mb-6">Manage Ads</h1><p>Admin ads page coming soon...</p></div>;

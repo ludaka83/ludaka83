@@ -1,0 +1,23 @@
+{
+  "name": "studify-app",
+  "version": "1.0.0",
+  "description": "A secure learning platform with admin video upload and ad monetization",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/server.js",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "install-all": "npm install && npm run install-client && npm run install-server",
+    "start": "node server/server.js"
+  },
+  "keywords": ["education", "learning", "video", "monetization"],
+  "author": "Studify Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}

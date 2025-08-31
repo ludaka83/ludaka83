@@ -1,0 +1,2 @@
+import React from 'react';
+export const DashboardPage: React.FC = () => <div className="container-custom py-8"><h1 className="text-3xl font-bold mb-6">Dashboard</h1><p>Dashboard page coming soon...</p></div>;
