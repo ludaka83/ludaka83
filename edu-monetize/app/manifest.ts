@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Edu Monetize",
-    short_name: "Edu",
-    description: "Lessons with video, notes, and presentations",
+    name: "Tiwane School",
+    short_name: "Tiwane",
+    description: "Tiwane School – Lessons with video, notes, and presentations",
     start_url: "/",
     scope: "/",
     display: "standalone",
